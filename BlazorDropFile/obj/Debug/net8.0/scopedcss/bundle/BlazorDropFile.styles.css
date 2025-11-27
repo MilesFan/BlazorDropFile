@@ -1,0 +1,39 @@
+/* _content/BlazorDropFile/FileDropZone.razor.rz.scp.css */
+[b-02y7nuoxhd] .drop-zone {
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    margin: 20px auto;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+[b-02y7nuoxhd] .dragover {
+    border-color: #007bff;
+    background-color: #f8f9fa;
+}
+[b-02y7nuoxhd] .nodrop {
+    cursor: not-allowed;
+}
+
+.drop-zone[b-02y7nuoxhd]  p {
+    margin: 0;
+    color: #666;
+    font-size: 1.1em;
+}
+
+[b-02y7nuoxhd] .file-list {
+    margin: 20px auto;
+    max-width: 400px;
+}
+
+[b-02y7nuoxhd] .file-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}

@@ -1,0 +1,47 @@
+[b-39mgnrsy2f] .drop-zone {
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    margin: 20px auto;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+[b-39mgnrsy2f] .dragover {
+    border-color: #007bff;
+    background-color: #f8f9fa;
+}
+
+[b-39mgnrsy2f] .nodrop {
+    cursor: not-allowed;
+}
+
+[b-39mgnrsy2f] .drop-zone p {
+    margin: 0;
+    color: #666;
+    font-size: 1.1em;
+}
+
+.file-list[b-39mgnrsy2f] {
+    margin: 20px auto;
+    max-width: 400px;
+}
+
+.file-item[b-39mgnrsy2f] {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+table[b-39mgnrsy2f]{
+    border-collapse: collapse;
+    width:100%;
+}
+table th[b-39mgnrsy2f], table td[b-39mgnrsy2f] {
+    border: 1px solid gray;
+    padding: 10px;
+}
