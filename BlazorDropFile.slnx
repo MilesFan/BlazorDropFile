@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="BlazorDropFile/BlazorDropFile.csproj" />
+  <Project Path="Example/Example.csproj" />
+</Solution>

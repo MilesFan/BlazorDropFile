@@ -1,0 +1,47 @@
+﻿::deep .drop-zone {
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    margin: 20px auto;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+::deep .dragover {
+    border-color: #007bff;
+    background-color: #f8f9fa;
+}
+
+::deep .nodrop {
+    cursor: not-allowed;
+}
+
+::deep .drop-zone p {
+    margin: 0;
+    color: #666;
+    font-size: 1.1em;
+}
+
+.file-list {
+    margin: 20px auto;
+    max-width: 400px;
+}
+
+.file-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+table{
+    border-collapse: collapse;
+    width:100%;
+}
+table th, table td {
+    border: 1px solid gray;
+    padding: 10px;
+}

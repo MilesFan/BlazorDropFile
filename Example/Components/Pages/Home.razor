@@ -1,0 +1,165 @@
+﻿@page "/"
+@inject IJSRuntime js
+@using static BlazorDropFile.FileDropZone
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+<span draggable="true">Test</span>
+<div>
+
+    <FileDropZone DataSetName="rowcol" OnFilesDropped="HandleFilesDrop1">
+        <table>
+            <thead>
+                <tr>
+                    @for (int col = 0; col < Grid1.GetLength(1); col++)
+                    {
+                        <th>Column @col</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (int row = 0; row < Grid1.GetLength(0); row++)
+                {
+                    <tr>
+                        @for (int col = 0; col < Grid1.GetLength(1); col++)
+                        {
+                            <td class="droppable" data-rowcol="@row-@col">
+                                @if (Grid1[row, col].File!=null)
+                                {
+                                    var img_type = Path.GetExtension(Grid1[row, col].File!.Name).ToLower();
+                                    <img style="max-width:100px; max-height: 60px;" src="data:image/@(img_type);base64,@(Convert.ToBase64String(Grid1[row, col].File!.Content))" alt="Red Dot">
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </FileDropZone>
+@*     @if (droppedFilesA.Any())
+    {
+        <div class="file-list">
+            <h3>Dropped Files:</h3>
+            @foreach (var file in droppedFilesA)
+            {
+                <div class="file-item">
+                    <p><strong>Name:</strong> @file.Name</p>
+                    <p><strong>Type:</strong> @file.Type</p>
+                    <p><strong>Size:</strong> @file.Size bytes</p>
+                    <p><strong>Row:</strong> @file.HTMLElementData.Split("-")[0]</p>
+                    <p><strong>Col:</strong> @file.HTMLElementData.Split("-")[1]</p>
+                </div>
+            }
+        </div>
+    } *@
+
+    <hr />
+
+    <FileDropZone DataSetName="rowcol" DroppableClass="dropfile" OnFilesDropped="HandleFilesDrop2">
+        <table>
+            <thead>
+                <tr>
+                    @for (int col = 0; col < Grid1.GetLength(1); col++)
+                    {
+                        <th>Column @col</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (int row = 0; row < Grid2.GetLength(0); row++)
+                {
+                    <tr>
+                        @for (int col = 0; col < Grid2.GetLength(1); col++)
+                        {
+                            <td class="droppable" data-rowcol="@row-@col">@Grid2[row, col].File?.Name</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </FileDropZone>
+@*     @if (droppedFilesB.Any())
+    {
+        <div class="file-list">
+            <h3>Dropped Files:</h3>
+            @foreach (var file in droppedFilesB)
+            {
+                <div class="file-item">
+                    <p><strong>Name:</strong> @file.Name</p>
+                    <p><strong>Type:</strong> @file.Type</p>
+                    <p><strong>Size:</strong> @file.Size bytes</p>
+                    <p><strong>Row:</strong> @file.HTMLElementData.Split("-")[0]</p>
+                    <p><strong>Col:</strong> @file.HTMLElementData.Split("-")[1]</p>
+                </div>
+            }
+        </div>
+    } *@
+</div>
+@code{
+
+    private class GridItem
+    {
+        public int Row { get; set; }
+        public int Column { get; set; }
+        public DroppedFile? File { get; set; }
+    }
+
+    private GridItem[,] Grid1 = new GridItem[5, 3];
+    private GridItem[,] Grid2 = new GridItem[4, 4];
+
+    protected override void OnInitialized()
+    {
+        for (int row = 0; row < Grid1.GetLength(0); row++)
+        {
+            for (int col = 0; col < Grid1.GetLength(1); col++)
+            {
+                Grid1[row, col] = new GridItem { Row = row, Column = col };
+            }
+        }
+        for (int row = 0; row < Grid2.GetLength(0); row++)
+        {
+            for (int col = 0; col < Grid2.GetLength(1); col++)
+            {
+                Grid2[row, col] = new GridItem { Row = row, Column = col };
+            }
+        }
+        base.OnInitialized();
+    }
+
+    public async Task HandleFilesDrop1(IEnumerable<DroppedFile> files)
+    {
+        if (files.AsQueryable().Any(file =>
+            file.Name.EndsWith(".png") == false &&
+            file.Name.EndsWith(".jpg") == false &&
+            file.Name.EndsWith(".jpeg") == false))
+        {
+            await js.InvokeVoidAsync("alert", "accepts only png files");
+            return;
+        }
+        foreach(var file in files)
+        {
+            var row_col = file.HTMLElementData?.Split('-');
+            if (row_col == null || row_col.Length != 2)
+                continue;
+            var row = int.Parse(row_col[0]);
+            var col = int.Parse(row_col[1]);
+            Grid1[row, col].File = file;
+        }
+    }
+
+    public async Task HandleFilesDrop2(IEnumerable<DroppedFile> files)
+    {
+        foreach (var file in files)
+        {
+            var row_col = file.HTMLElementData?.Split('-');
+            if (row_col == null || row_col.Length != 2)
+                continue;
+            var row = int.Parse(row_col[0]);
+            var col = int.Parse(row_col[1]);
+            Grid2[row, col].File = file;
+        }
+    }
+}

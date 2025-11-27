@@ -1,0 +1,91 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.Extensions.Logging
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+@inject ILogger<FileDropZone> Logger
+@implements IAsyncDisposable
+<div class="@Class" style="@Style" @ref="dropZoneElement">
+    @ChildContent
+</div>
+
+
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent{ get; set; }
+
+    [Parameter, EditorRequired]
+    public EventCallback<IEnumerable<DroppedFile>> OnFilesDropped { get; set; }
+
+    [Parameter]
+    public string? Class { get; set; }
+
+    [Parameter]
+    public string? Style { get; set; }
+
+    [Parameter]
+    public string DataSetName { get; set; } = "droppableid";
+
+    [Parameter]
+    public string DroppableClass { get; set; } = "droppable";
+
+    [Parameter]
+    public string DragoverClass { get; set; } = "dragover";
+
+    private ElementReference dropZoneElement;
+    private DotNetObjectReference<FileDropZone>? dotNetHelper;
+    private IJSObjectReference? jsmoudule;
+    private IJSObjectReference? jsinstance;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            dotNetHelper = DotNetObjectReference.Create(this);
+            jsmoudule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", $"./_content/{nameof(BlazorDropFile)}/{nameof(FileDropZone)}.razor.js");
+            if (jsmoudule != null) jsinstance = await jsmoudule.InvokeAsync<IJSObjectReference>("createFileDropZoneInstance");
+            if (jsinstance != null) await jsinstance.InvokeVoidAsync("initialize", dropZoneElement, DataSetName, DroppableClass, DragoverClass, dotNetHelper, nameof(HandleFilesDrop));
+            //await moduleHandle.DisposeAsync();
+        }
+    }
+
+    [JSInvokable]
+    public async Task HandleFilesDrop(List<DroppedFileBase64> files)
+    {
+        //droppedFiles = files.Select(i=>i as DroppedFileBase).ToList();
+        var droppedFilesBinary = files.Select(i => DroppedFile.FromBase64(i)).ToList();
+
+        await OnFilesDropped.InvokeAsync(droppedFilesBinary);
+        // StateHasChanged();
+
+        // foreach (var file in files)
+        // {
+        //     Logger.LogInformation($"File dropped: {file.Name}, Size: {file.Size} bytes");
+        // }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (jsinstance != null)
+        {
+            await jsinstance.InvokeVoidAsync("uninitialize", dropZoneElement);
+            await jsinstance.DisposeAsync();
+        }
+        if (jsmoudule != null)
+        {
+            await jsmoudule.DisposeAsync();
+        }
+        dotNetHelper?.Dispose();
+    }
+
+    // public async ValueTask DisposeAsync()
+    // {
+    //     if (jsmoudule != null)
+    //     {
+    //         await jsmoudule.InvokeVoidAsync("uninitialize", dropZoneElement, "droppable");
+    //         await jsmoudule.DisposeAsync();
+    //     }
+    //     dotNetHelper?.Dispose();
+    //     throw new NotImplementedException();
+    // }
+
+}
