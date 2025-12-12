@@ -19,7 +19,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore DynamicTable.csproj
     - name: Build
-      run: dotnet build DynamicTable.csproj --no-restore
+      run: dotnet build DynamicTable.csproj --configuration Release --no-restore
       
     - name: Pack
       run: dotnet pack DynamicTable.csproj --configuration Release --output ./artifacts --no-build /p:PackageVersion=${{ env.VERSION }}
