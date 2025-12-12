@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Miles\\source\\repos\\BlazorDropFile\\Example\\Example.csproj": {}
+    "C:\\Users\\z002wkem\\source\\repos\\BlazorDropFile\\Example\\Example.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Miles\\source\\repos\\BlazorDropFile\\BlazorDropFile\\BlazorDropFile.csproj": {
+    "C:\\Users\\z002wkem\\source\\repos\\BlazorDropFile\\BlazorDropFile\\BlazorDropFile.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Miles\\source\\repos\\BlazorDropFile\\BlazorDropFile\\BlazorDropFile.csproj",
+        "projectUniqueName": "C:\\Users\\z002wkem\\source\\repos\\BlazorDropFile\\BlazorDropFile\\BlazorDropFile.csproj",
         "projectName": "BlazorDropFile",
-        "projectPath": "C:\\Users\\Miles\\source\\repos\\BlazorDropFile\\BlazorDropFile\\BlazorDropFile.csproj",
-        "packagesPath": "C:\\Users\\Miles\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Miles\\source\\repos\\BlazorDropFile\\BlazorDropFile\\obj\\",
+        "projectPath": "C:\\Users\\z002wkem\\source\\repos\\BlazorDropFile\\BlazorDropFile\\BlazorDropFile.csproj",
+        "packagesPath": "C:\\Users\\z002wkem\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\z002wkem\\source\\repos\\BlazorDropFile\\BlazorDropFile\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Miles\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\z002wkem\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -27,6 +27,8 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Users\\z002wkem\\OneDrive - Siemens Energy\\Dev\\MyNugetLibrary\\": {},
+          "G:\\temp\\BlazorDatasheet\\src\\BlazorDatasheet\\bin\\Release": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -76,20 +78,20 @@
         }
       }
     },
-    "C:\\Users\\Miles\\source\\repos\\BlazorDropFile\\Example\\Example.csproj": {
+    "C:\\Users\\z002wkem\\source\\repos\\BlazorDropFile\\Example\\Example.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Miles\\source\\repos\\BlazorDropFile\\Example\\Example.csproj",
+        "projectUniqueName": "C:\\Users\\z002wkem\\source\\repos\\BlazorDropFile\\Example\\Example.csproj",
         "projectName": "Example",
-        "projectPath": "C:\\Users\\Miles\\source\\repos\\BlazorDropFile\\Example\\Example.csproj",
-        "packagesPath": "C:\\Users\\Miles\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Miles\\source\\repos\\BlazorDropFile\\Example\\obj\\",
+        "projectPath": "C:\\Users\\z002wkem\\source\\repos\\BlazorDropFile\\Example\\Example.csproj",
+        "packagesPath": "C:\\Users\\z002wkem\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\z002wkem\\source\\repos\\BlazorDropFile\\Example\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Miles\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\z002wkem\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -99,14 +101,16 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Users\\z002wkem\\OneDrive - Siemens Energy\\Dev\\MyNugetLibrary\\": {},
+          "G:\\temp\\BlazorDatasheet\\src\\BlazorDatasheet\\bin\\Release": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Miles\\source\\repos\\BlazorDropFile\\BlazorDropFile\\BlazorDropFile.csproj": {
-                "projectPath": "C:\\Users\\Miles\\source\\repos\\BlazorDropFile\\BlazorDropFile\\BlazorDropFile.csproj"
+              "C:\\Users\\z002wkem\\source\\repos\\BlazorDropFile\\BlazorDropFile\\BlazorDropFile.csproj": {
+                "projectPath": "C:\\Users\\z002wkem\\source\\repos\\BlazorDropFile\\BlazorDropFile\\BlazorDropFile.csproj"
               }
             }
           }
