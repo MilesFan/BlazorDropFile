@@ -5,6 +5,11 @@ name: NuGet Publish
 
 on: workflow_dispatch
 
+# Required so actions can request OIDC tokens (NuGet/login uses OIDC)
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   build:
 
