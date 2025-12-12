@@ -19,10 +19,10 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore DynamicTable.csproj
     - name: Build
-      run: dotnet build DynamicTable.csproj --configuration Release --no-restore
+      run: dotnet build BlazorDropFile/BlazorDropFile.csproj --configuration Release --no-restore
       
     - name: Pack
-      run: dotnet pack DynamicTable.csproj --configuration Release --output ./artifacts --no-build /p:PackageVersion=${{ env.VERSION }}
+      run: dotnet pack BlazorDropFile/BlazorDropFile.csproj --configuration Release --output ./artifacts --no-build /p:PackageVersion=${{ env.VERSION }}
       
     # Get a short-lived NuGet API key
     - name: NuGet login (OIDC → temp API key)
