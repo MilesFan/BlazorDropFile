@@ -5,6 +5,11 @@ name: NuGet Publish
 
 on: workflow_dispatch
 
+# Required so actions can request OIDC tokens (NuGet/login uses OIDC)
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   build:
 
@@ -20,21 +25,38 @@ jobs:
       run: dotnet restore BlazorDropFile/BlazorDropFile.csproj
     - name: Build
       run: dotnet build BlazorDropFile/BlazorDropFile.csproj --configuration Release --no-restore
-    
+
+    - name: Get version from csproj
+      id: get_version
+      run: |
+        echo "Reading version from BlazorDropFile/BlazorDropFile.csproj"
+        # Try <Version>
+        VERSION=$(sed -n 's:.*<Version>\(.*\)</Version>.*:\1:p' BlazorDropFile/BlazorDropFile.csproj | head -n1)
+        # Fallback to <PackageVersion>
+        if [ -z "$VERSION" ]; then
+          VERSION=$(sed -n 's:.*<PackageVersion>\(.*\)</PackageVersion>.*:\1:p' BlazorDropFile/BlazorDropFile.csproj | head -n1)
+        fi
+        if [ -z "$VERSION" ]; then
+          echo "ERROR: No <Version> or <PackageVersion> found in csproj"
+          exit 1
+        fi
+        echo "Found version: $VERSION"
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+
     - name: Print version
-      run: echo 'Version:${{env.VERSION}}'
-    
+      run: echo "Version:$VERSION"
+
     - name: Pack
-      #run: dotnet pack BlazorDropFile/BlazorDropFile.csproj --configuration Release --output ./artifacts --no-build /p:PackageVersion=${{ env.VERSION }}
-      run: dotnet pack BlazorDropFile/BlazorDropFile.csproj --configuration Release --output ./artifacts --no-build
-      
+      run: dotnet pack BlazorDropFile/BlazorDropFile.csproj --configuration Release --output ./artifacts --no-build /p:PackageVersion=$VERSION
+
     # Get a short-lived NuGet API key
     - name: NuGet login (OIDC → temp API key)
       uses: NuGet/login@v1
       id: login
       with:
         user: ${{ secrets.NUGET_USER }} # Recommended: use a secret like ${{ secrets.NUGET_USER }} for your nuget.org username (profile name), NOT your email address
-        
+
     # Push the package
     - name: NuGet push
-      run: dotnet nuget push artifacts/BlazorDropFile.nupkg --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push artifacts/*.nupkg --api-key ${{ steps.login.outputs.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
