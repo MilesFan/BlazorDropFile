@@ -62,7 +62,7 @@ Welcome to your new app.
         <table>
             <thead>
                 <tr>
-                    @for (int col = 0; col < Grid1.GetLength(1); col++)
+                    @for (int col = 0; col < Grid2.GetLength(1); col++)
                     {
                         <th>Column @col</th>
                     }
@@ -74,7 +74,7 @@ Welcome to your new app.
                     <tr>
                         @for (int col = 0; col < Grid2.GetLength(1); col++)
                         {
-                            <td class="droppable" data-rowcol="@row-@col">@Grid2[row, col].File?.Name</td>
+                            <td class="dropfile" data-rowcol="@row-@col">@Grid2[row, col].File?.Name</td>
                         }
                     </tr>
                 }
