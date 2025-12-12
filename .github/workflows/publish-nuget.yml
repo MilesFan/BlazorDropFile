@@ -20,9 +20,13 @@ jobs:
       run: dotnet restore BlazorDropFile/BlazorDropFile.csproj
     - name: Build
       run: dotnet build BlazorDropFile/BlazorDropFile.csproj --configuration Release --no-restore
-      
+    
+    - name: Print version
+      run: echo 'Version:${{env.VERSION}}'
+    
     - name: Pack
-      run: dotnet pack BlazorDropFile/BlazorDropFile.csproj --configuration Release --output ./artifacts --no-build /p:PackageVersion=${{ env.VERSION }}
+      #run: dotnet pack BlazorDropFile/BlazorDropFile.csproj --configuration Release --output ./artifacts --no-build /p:PackageVersion=${{ env.VERSION }}
+      run: dotnet pack BlazorDropFile/BlazorDropFile.csproj --configuration Release --output ./artifacts --no-build
       
     # Get a short-lived NuGet API key
     - name: NuGet login (OIDC → temp API key)
