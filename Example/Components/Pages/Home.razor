@@ -39,22 +39,6 @@ Welcome to your new app.
             </tbody>
         </table>
     </FileDropZone>
-@*     @if (droppedFilesA.Any())
-    {
-        <div class="file-list">
-            <h3>Dropped Files:</h3>
-            @foreach (var file in droppedFilesA)
-            {
-                <div class="file-item">
-                    <p><strong>Name:</strong> @file.Name</p>
-                    <p><strong>Type:</strong> @file.Type</p>
-                    <p><strong>Size:</strong> @file.Size bytes</p>
-                    <p><strong>Row:</strong> @file.HTMLElementData.Split("-")[0]</p>
-                    <p><strong>Col:</strong> @file.HTMLElementData.Split("-")[1]</p>
-                </div>
-            }
-        </div>
-    } *@
 
     <hr />
 
