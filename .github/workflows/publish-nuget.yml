@@ -40,7 +40,7 @@ jobs:
         echo "version=$VERSION" >> $GITHUB_OUTPUT
 
     - name: Print version
-      run: echo "Version: $VERSION"
+      run: echo "Version:$VERSION"
 
     - name: Pack
       run: dotnet pack BlazorDropFile/BlazorDropFile.csproj --configuration Release --output ./artifacts --no-build /p:PackageVersion=$VERSION
